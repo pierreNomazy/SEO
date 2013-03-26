@@ -1,0 +1,14 @@
+{% block head %}
+    {% if product.get_meta_keywords %}
+        <meta name="keywords" content="{{ product.get_meta_keywords }}" />
+    {% endif %}
+    {% if product.get_meta_description %}
+        <meta name="description" content="{{ product.get_meta_description }}" />
+    {% endif %}
+    {% if product.parent.is_product_with_variants %}  
+	<link rel="canonical" href="{{ variant_canonical.get_absolute_url }}">
+    {% endif %}
+    {% if first_category.level == 10 %}
+	<link rel="canonical" href="{{ first_category.get_absolute_url }}">
+    {% endif %}
+{% endblock %}
