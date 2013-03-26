@@ -1,0 +1,7 @@
+# Robots
+User-agent: *
+Allow: /
+Disallow: /reviews/add/
+Disallow: /login
+Disallow: /contact
+Disallow: /my-account
