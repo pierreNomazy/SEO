@@ -28,3 +28,28 @@ def product_view(request, slug, template_name="lfs/catalog/product_base.html"):
     }))
 
     return result
+    
+    ........
+    def category_view(request, slug, template_name="lfs/catalog/category_base.html"):
+    """
+    """
+    start = request.REQUEST.get("start", 1)
+    category = lfs_get_object_or_404(Category, slug=slug)
+    if category.get_content() == CONTENT_PRODUCTS:
+        inline = category_products(request, slug, start)
+    else:
+        inline = category_categories(request, slug)
+    # Set last visited category for later use, e.g. Display breadcrumbs,
+    # selected menu points, etc.
+    request.session["last_category"] = category
+
+    # TODO: Factor top_category out to a inclusion tag, so that people can
+    # omit if they don't need it.
+    url = request.REQUEST.get("start", 1)
+    return render_to_response(template_name, RequestContext(request, {
+        "category": category,
+        "category_inline": inline,
+        "top_category": lfs.catalog.utils.get_current_top_category(request, category),
+	"pagination":request.REQUEST.get("start", 0),
+    }))
+
