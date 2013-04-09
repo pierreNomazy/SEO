@@ -18,4 +18,7 @@ sitemap.py and urls.py
 4) Use Rich snippets, look at google doc and : product_inline.html. You can add other itemprop of schema.org/Product.
 and breadcrumbs.html.
 
+5) Canonical pages to the category slug : in the category_view in views.py add in the render to response (line 281) : "pagination":request.REQUEST.get("start", 0), . In category_base.html, add in the block head : {% if pagination != 0 %}
+{% endif %}.
+
 Pierre
